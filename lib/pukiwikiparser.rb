@@ -24,7 +24,7 @@ module PukiWikiParser
   class PukiWikiParser
     include HTMLUtils
 
-    def initialize(logger)
+    def initialize(logger = nil)
       @logger = logger
       @h_start_level = 2
     end
@@ -77,14 +77,14 @@ module PukiWikiParser
     end
 
     def parse_h(line)
-      @logger.debug "h: #{line.inspect}"
+      @logger.debug "h: #{line.inspect}" if @logger
       level = @h_start_level + (line.slice(/\A\*{1,4}/).length - 1)
       content = line.sub(/\A\*+/, '')
       "<h#{level}>#{parse_inline(content)}</h#{level}>"
     end
 
     def parse_list(type, lines)
-      @logger.debug "#{type}: #{lines.inspect}"
+      @logger.debug "#{type}: #{lines.inspect}" if @logger
       marker = ((type == 'ul') ? /\A-/ : /\A\+/)
       parse_list0(type, lines, marker)
     end
@@ -106,7 +106,7 @@ module PukiWikiParser
     end
 
     def parse_dl(lines)
-      @logger.debug "dl: #{lines.inspect}"
+      @logger.debug "dl: #{lines.inspect}" if @logger
       buf = ["<dl>"]
       lines.each do |line|
         dt, dd = *line.split('|', 2)
@@ -118,12 +118,12 @@ module PukiWikiParser
     end
 
     def parse_quote(lines)
-      @logger.debug "quote: #{lines.inspect}"
+      @logger.debug "quote: #{lines.inspect}" if @logger
       [ "<blockquote><p>", lines.join("\n"), "</p></blockquote>"]
     end
 
     def parse_pre(lines)
-      @logger.debug "pre: #{lines.inspect}"
+      @logger.debug "pre: #{lines.inspect}" if @logger
       [ "<pre><code>#{lines.map {|line| escape(line) }.join("\n")}",
         '</code></pre>']
     end
