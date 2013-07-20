@@ -62,7 +62,7 @@ module PukiWikiParser
           buf.push '</p>'
         end
       end
-      buf.join("\n")
+      buf.join("\n").gsub(/~$/, '<br />')
     end
 
     private
