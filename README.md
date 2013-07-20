@@ -9,13 +9,13 @@ http://magazine.rubyist.net/?0010-CodeReview
 
 Add this line to your application's Gemfile:
 
-    gem 'pukiwikiparser'
+    gem 'pukiwikiparser', git: 'git://github.com/akishin/pukiwikiparser.git'
 
 ## Usage
 
-    require 'logger'
     require 'pukiwikiparser'
-    parser = PukiWikiParser::PukiWikiParser.new(Logger.new($stdout))
+    
+    parser = PukiWikiParser::PukiWikiParser.new
     puts parser.to_html(input, [])
 
 ## License
