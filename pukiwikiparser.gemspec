@@ -12,6 +12,9 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{PukiWiki parser.}
   gem.homepage      = "http://jp.rubyist.net/magazine/?0010-CodeReview-pukiwikiparser.rb"
 
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rspec'
+
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
